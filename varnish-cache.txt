@@ -1,0 +1,39 @@
+
+//install
+dnf -y install varnish
+systemctl enable varnish //run at boot
+[root@host ~]# systemctl enable varnish
+Created symlink from /etc/systemd/system/multi-user.target.wants/varnish.service 
+ to /usr/lib/systemd/system/varnish.service.
+systemctl start varnish
+systemctl status varnish
+Varnish is configured to listen on port 6081 by default. 
+It expects your web server to be listening on port 8080.
+
+A basic and default configuration file can be found at:
+/etc/varnish/default.vcl
+/usr/share/doc/varnish/example.vcl  #example configuration
+
+//manual
+service varnish start 
+also varnish can be started: varnishd -a :6081 -T localhost:6082 -b localhost:8080 
+
+Varnish
+
+Installed:
+  jemalloc.x86_64 3.6.0-8.fc22                    
+  varnish.x86_64 4.0.3-3.fc22                    
+  varnish-libs.x86_64 4.0.3-3.fc22                   
+root     10944  0.4  1.4 124952 85096 ?        SLs  17:15   0:00 /usr/sbin/varnishd -P /var/run/varnish.pid 
+   -f /etc/varnish/default.vcl -a :6081 -T 127.0.0.1:6082 -t 120 -u varnish -g varnish -S /etc/varnish/secret 
+   -s file,/var/lib/varnish/varnish_storage.bin,1G
+
+varnish  10966  0.3  1.4 1365488 86624 ?       Sl   17:15   0:00 /usr/sbin/varnishd -P /var/run/varnish.pid 
+   -f /etc/varnish/default.vcl -a :6081 -T 127.0.0.1:6082 -t 120 -u varnish -g varnish -S /etc/varnish/secret 
+   -s file,/var/lib/varnish/varnish_storage.bin,1G
+
+
+
+
+
+
